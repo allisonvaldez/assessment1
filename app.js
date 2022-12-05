@@ -2,6 +2,8 @@
 QUESTIONS:
 1. when should i use event delegation?)
 2. diff btw event delegation and eventListener
+3. how to get removeBtn to populate with each meme
+4. create img source (why need this?)
 */
 
 
@@ -42,13 +44,20 @@ function gatherTopText(textOne) {
     return textTopOne;
 }
 
-/* gather img text for meme source: https://stackoverflow.com/questions/17634019/javascript-load-an-image-from-url-and-display */
-function gatherImg() {
-    const val = document.getElementById("url-link");
-    const src = urlInput + val;
+/* 
+gather img text for meme 
+source:  https://www.youtube.com/watch?v=26pC8UuAsww
+*/
+function gatherImg(url) {
+    // create element to store img
     const img = document.createElement('img');
 
-    img.src = src;
+    // gather link from form
+    url = document.getElementById("url-link").value;
+
+    // create img source (why need this?)
+    img.src = url;
+    
     document.body.appendChild(img);
 }
 
@@ -94,7 +103,6 @@ formElement.addEventListener("submit", function (e) {
     3. we clear first text form
     */
     const populateImg = gatherImg(urlInput.value);
-    placeMeme.appendChild(populateImg);
     urlInput.value = "";
 
     /* 
