@@ -32,6 +32,7 @@ each action should have its own function:
 2. function to gather img text for meme
 3. function to gather bottom text for meme
 4. function for rgb effect for title
+5. function for remove button
 
 */
 
@@ -91,22 +92,30 @@ function gatherBottomText(textTwo) {
     return textBottomOne;
 }
 
+// function to remove meme via button
+function removeButton() {
+    removeMeme.innerText = "Remove Meme";
+    placeMeme.appendChild(removeMeme);
+
+}
+
 
 /*
 each action should have its event delegation:
 1. remove button
 2. click sumbit add the three together prepend append??? on sumbit?
-
 */
 
 //remove button as event delegation
 placeMeme.addEventListener("click", function (e) {
-    
+    if (e.target.tagName === "BUTTON") {
+        console.log(e.target);
+        e.target.parentElement.remove();
+    } 
 });
 
 
-// click event for sumbit button
-// create remove button here???
+// click event for sumbit button...create remove button here???
 formElement.addEventListener("submit", function (e) {
     e.preventDefault();
     console.log("submit triggered");
@@ -121,11 +130,10 @@ formElement.addEventListener("submit", function (e) {
     textTop.value = "";
 
     /* 
-    1. populateImg saves the url input for img into a variable
-    2. placeMeme appends it to dedicated place in DOM
-    3. we clear first text form
+    1. gatherImg function is called to populate the img on the DOM
+    2. we clear first text form
     */
-    const populateImg = gatherImg(urlInput.value);
+    gatherImg(urlInput.value);
     urlInput.value = "";
 
     /* 
@@ -136,4 +144,8 @@ formElement.addEventListener("submit", function (e) {
     const secondText = gatherBottomText(textBottom.value);
     placeMeme.appendChild(secondText);
     textBottom.value = "";
+
+    /*
+     
+     */
 })
