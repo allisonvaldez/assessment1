@@ -15,6 +15,7 @@ QUESTIONS:
  4. textBottom gathers text input from the form element
  5. placeMeme places the meme below the form
  6. removeMeme removes the meme and text (but need to create element fitst)
+ 7. letters for the title for multicolor effect
  */
 
 const formElement = document.querySelector("#form");
@@ -23,14 +24,31 @@ const urlInput = document.querySelector('input[name="url-link"]');
 const textBottom = document.querySelector('input[name="tBottom"]');
 const placeMeme = document.querySelector("#memePlacement");
 const removeMeme = document.createElement("button");
+const letters = document.querySelectorAll(".letter");
 
 /* 
 each action should have its own function:
 1. function to gather top text for meme
 2. function to gather img text for meme
 3. function to gather bottom text for meme
+4. function for rgb effect for title
 
 */
+
+function randomizeRGB() {
+    // randomizes the color assignment for the rgb function
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+    return `rgb(${r},${g},${b})`;
+}
+
+setInterval(() => {
+    for (let letter of letters) {
+        letter.style.color = randomizeRGB();
+    }
+
+}, 1000);
 
 //gather top text for meme
 function gatherTopText(textOne) {
@@ -81,9 +99,14 @@ each action should have its event delegation:
 
 */
 
-//remove button
+//remove button as event delegation
+placeMeme.addEventListener("click", function (e) {
+    
+});
+
 
 // click event for sumbit button
+// create remove button here???
 formElement.addEventListener("submit", function (e) {
     e.preventDefault();
     console.log("submit triggered");
