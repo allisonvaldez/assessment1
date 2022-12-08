@@ -1,23 +1,10 @@
 /*
-QUESTIONS:
-1. when should i use event delegation?)
-2. diff btw event delegation and eventListener
-3. how to get removeBtn to populate with each meme
-4. create img source (why need this?)
-
-todo:
-put divs or other elements to have placement
-*/
-
-
-/*
  Create the elements of the DOM:
  1. formElement creates the form element
  2. textTop gathers text input from the form element
  3. urlInput gathers url input from the form element
  4. textBottom gathers text input from the form element
  5. placeMeme places the meme below the form
- 6. removeMeme removes the meme and text (but need to create element fitst)
  7. letters for the title for multicolor effect
  */
 
@@ -26,7 +13,6 @@ const textTop = document.querySelector('input[name="tTop"]');
 const urlInput = document.querySelector('input[name="url-link"]');
 const textBottom = document.querySelector('input[name="tBottom"]');
 const placeMeme = document.querySelector("#memePlacement");
-const removeMeme = document.createElement("button");
 const letters = document.querySelectorAll(".letter");
 
 /* 
@@ -80,7 +66,7 @@ function gatherImg(url) {
     // create img source (why need this?)
     img.src = url;
     
-    document.body.appendChild(img);
+    placeMeme.appendChild(img);
 }
 
 // gather bottom text for meme
@@ -94,14 +80,6 @@ function gatherBottomText(textTwo) {
     // return created element
     return textBottomOne;
 }
-
-// function to remove meme via button
-function removeButton() {
-    removeMeme.innerText = "Remove Meme";
-    placeMeme.appendChild(removeMeme);
-
-}
-
 
 /*
 each action should have its event delegation:
@@ -122,7 +100,7 @@ formElement.addEventListener("submit", function (e) {
     e.preventDefault();
     console.log("submit triggered");
 
-    /* 
+    /*
     1. firstText saves the input for the 1st textbox from into a variable
     2. placeMeme appends it to dedicated place in DOM
     3. we clear first text form
@@ -148,7 +126,8 @@ formElement.addEventListener("submit", function (e) {
     textBottom.value = "";
 
     // place remove button
-    
-    removeButton();
+    const removeMeme = document.createElement("button");
+    removeMeme.innerText = "Remove Meme";
+    placeMeme.appendChild(removeMeme);
 
 })
