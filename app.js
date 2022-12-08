@@ -4,6 +4,9 @@ QUESTIONS:
 2. diff btw event delegation and eventListener
 3. how to get removeBtn to populate with each meme
 4. create img source (why need this?)
+
+todo:
+put divs or other elements to have placement
 */
 
 
@@ -114,7 +117,6 @@ placeMeme.addEventListener("click", function (e) {
     } 
 });
 
-
 // click event for sumbit button...create remove button here???
 formElement.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -145,7 +147,8 @@ formElement.addEventListener("submit", function (e) {
     placeMeme.appendChild(secondText);
     textBottom.value = "";
 
-    /*
-     
-     */
+    // place remove button
+    
+    removeButton();
+
 })
