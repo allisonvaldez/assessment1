@@ -43,7 +43,7 @@ setInterval(() => {
 //gather top text for meme
 function gatherTopText(textOne) {
     //create an element to store gathered text from input for top
-    const textTopOne = document.createElement('h2');
+    const textTopOne = document.createElement('div');
 
     // set inner text of created h6 element from input
     textTopOne.innerText = textOne;
@@ -72,7 +72,7 @@ function gatherImg(url) {
 // gather bottom text for meme
 function gatherBottomText(textTwo) {
     //create an element to store gathered text from input for bottom
-    const textBottomOne = document.createElement('h2');
+    const textBottomOne = document.createElement('div');
 
     // set inner text of created h6 element from input
     textBottomOne.innerText = textTwo;
@@ -87,8 +87,9 @@ each action should have its event delegation:
 2. click sumbit add the three together prepend append??? on sumbit?
 */
 
-//remove button as event delegation
+//remove as event delegation
 placeMeme.addEventListener("click", function (e) {
+    e.preventDefault();
     if (e.target.tagName === "BUTTON") {
         console.log(e.target);
         e.target.parentElement.remove();
@@ -103,31 +104,28 @@ formElement.addEventListener("submit", function (e) {
     /*
     1. firstText saves the input for the 1st textbox from into a variable
     2. placeMeme appends it to dedicated place in DOM
-    3. we clear first text form
     */
     const firstText = gatherTopText(textTop.value);
     placeMeme.appendChild(firstText);
-    textTop.value = "";
+
 
     /* 
     1. gatherImg function is called to populate the img on the DOM
-    2. we clear first text form
     */
     gatherImg(urlInput.value);
-    urlInput.value = "";
 
     /* 
     1. secondText saves the input for the 1st textbox from into a variable
     2. placeMeme appends it to dedicated place in DOM
-    3. we clear third text form
     */
     const secondText = gatherBottomText(textBottom.value);
     placeMeme.appendChild(secondText);
-    textBottom.value = "";
 
     // place remove button
     const removeMeme = document.createElement("button");
     removeMeme.innerText = "Remove Meme";
     placeMeme.appendChild(removeMeme);
+
+    form.reset();
 
 })
