@@ -22,7 +22,6 @@ each action should have its own function:
 3. function to gather bottom text for meme
 4. function for rgb effect for title
 5. function for remove button
-
 */
 
 function randomizeRGB() {
@@ -53,8 +52,7 @@ function gatherTopText(textOne) {
 }
 
 /* 
-gather img text for meme 
-source:  https://www.youtube.com/watch?v=26pC8UuAsww
+gather img text for meme source:  https://www.youtube.com/watch?v=26pC8UuAsww
 */
 function gatherImg(url) {
     // create element to store img
@@ -65,8 +63,8 @@ function gatherImg(url) {
 
     // create img source (why need this?)
     img.src = url;
-    
-    placeMeme.appendChild(img);
+
+    return img;
 }
 
 // gather bottom text for meme
@@ -81,51 +79,59 @@ function gatherBottomText(textTwo) {
     return textBottomOne;
 }
 
-/*
-each action should have its event delegation:
-1. remove button
-2. click sumbit add the three together prepend append??? on sumbit?
-*/
-
 //remove as event delegation
 placeMeme.addEventListener("click", function (e) {
     e.preventDefault();
     if (e.target.tagName === "BUTTON") {
-        console.log(e.target);
+        console.log(e.target.parentElement);
         e.target.parentElement.remove();
     } 
 });
 
-// click event for sumbit button...create remove button here???
+// click event for sumbit button 
 formElement.addEventListener("submit", function (e) {
     e.preventDefault();
     console.log("submit triggered");
+    
+    /*
+    1. create an container element to store items
+    2. append it to the DOM
+    */
+    const container = document.createElement("div");
+    placeMeme.appendChild(container);
 
     /*
     1. firstText saves the input for the 1st textbox from into a variable
-    2. placeMeme appends it to dedicated place in DOM
+    2. append it to the container element
     */
     const firstText = gatherTopText(textTop.value);
-    placeMeme.appendChild(firstText);
+    container.appendChild(firstText);
 
 
     /* 
     1. gatherImg function is called to populate the img on the DOM
+    2. append it to the container element
     */
-    gatherImg(urlInput.value);
+    const placeImg = gatherImg(urlInput.value);
+    container.appendChild(placeImg);
 
     /* 
     1. secondText saves the input for the 1st textbox from into a variable
-    2. placeMeme appends it to dedicated place in DOM
+    2. append it to the container element
     */
     const secondText = gatherBottomText(textBottom.value);
-    placeMeme.appendChild(secondText);
+    container.appendChild(secondText);
 
-    // place remove button
+    /* 
+    1. create a remove button element
+    2. set the button text
+    2. append it to the container element
+    */
     const removeMeme = document.createElement("button");
     removeMeme.innerText = "Remove Meme";
-    placeMeme.appendChild(removeMeme);
-
+    container.appendChild(removeMeme);
+    
+    // reset the form after each submit
     form.reset();
 
 })
